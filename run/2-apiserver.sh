@@ -18,7 +18,7 @@ bin/kube-apiserver ${CERTS_OPTS} ${ETCD_OPTS} \
 
 
 # Try this
-# kubectl version --short
+# kubectl version
 
 # kubectl api-resources | head
 
