@@ -26,11 +26,11 @@ cat > ca-csr.json <<EOF
   },
   "names": [
     {
-      "C": "FR",
-      "L": "Pessac",
+      "C": "NC",
+      "L": "New-Caledonia",
       "O": "Kubernetes",
       "OU": "CA",
-      "ST": "Nouvelle Aquitaine"
+      "ST": "South-Pacific"
     }
   ]
 }
@@ -48,11 +48,11 @@ cat > admin-csr.json <<EOF
   },
   "names": [
     {
-      "C": "FR",
-      "L": "Pessac",
+      "C": "NC",
+      "L": "New-Caledonia",
       "O": "system:masters",
-      "OU": "Démystifions Kubernetes",
-      "ST": "Nouvelle Aquitaine"
+      "OU": "Kubernetes Cluster",
+      "ST": "South-Pacific"
     }
   ]
 }
@@ -61,7 +61,7 @@ cfssl gencert \
   -ca=ca.pem \
   -ca-key=ca-key.pem \
   -config=ca-config.json \
-  -hostname=127.0.0.1,10.0.0.1,10.244.0.1,kubernetes,kubernetes.default,kubernetes.default.svc,kubernetes.default.svc.cluster,kubernetes.svc.cluster.local \
+  -hostname=127.0.0.1,10.0.0.1,10.244.0.1,my.kubernetes.localhost,kubernetes,kubernetes.default,kubernetes.default.svc,kubernetes.default.svc.cluster,kubernetes.svc.cluster.local \
   -profile=kubernetes \
   admin-csr.json | cfssljson -bare admin
 }
