@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   rules:
-    - host: whoami.domain.localhost
+    - host: my.kubernetes.dev
       http:
         paths:
           - path: /
