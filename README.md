@@ -63,7 +63,7 @@ rm containerd-1.6.10-linux-amd64.tar.gz
 
 ### runc
 
-`containerd` is a high level container runtime which relies on `runc` (low level. Download it:
+`containerd` is a high level container runtime which relies on `runc` (low level.) Download it:
 
 ```bash
 curl https://github.com/opencontainers/runc/releases/download/v1.1.4/runc.amd64 -L -o runc
