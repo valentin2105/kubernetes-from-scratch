@@ -7,14 +7,11 @@ if [ `uname -i` == 'aarch64' ]; then
   ARCH="arm64"
 fi
 
-git fetch origin
-git reset --hard origin/main
-
 sudo apt update -y
 sudo apt upgrade -y
-sudo apt install tmux curl golang-cfssl linux-image-generic-hwe-22.04 -y
+sudo apt install tmux curl golang-cfssl  -y
 
-K8S_VERSION=1.27.0
+K8S_VERSION=1.27.3
 ETCD_VERSION=3.5.7
 CONTAINERD_VERSION=1.7.0
 RUNC_VERSION=1.1.4
@@ -23,9 +20,10 @@ CNI_PLUGINS_VERSION=1.2.0
 
 mkdir -p bin/
 
-# YOLO
+# get Helm
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
+# get k8s-bins
 curl -L https://dl.k8s.io/v${K8S_VERSION}/kubernetes-server-linux-${ARCH}.tar.gz -o kubernetes-server-linux-${ARCH}.tar.gz
 tar -zxf kubernetes-server-linux-${ARCH}.tar.gz
 for BINARY in kubectl kube-apiserver kube-scheduler kube-controller-manager kubelet kube-proxy;
@@ -77,9 +75,6 @@ if [ $? -eq 0 ]; then
   sudo iptables -F
   sudo netfilter-persistent save
 fi
-
-# prepare ingress host value
-sed -i "s/host: dk.zwindler.fr/host: dk${ARCH}.zwindler.fr/" ingress.yaml
 
 # this will save me from forgetting generating certs
 run/0-gen-certs.sh

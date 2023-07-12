@@ -1,13 +1,5 @@
 # demystifions-kubernetes
 
-## Prerequisites
-
-With his blessing, I was strongly inspired by Jérôme Petazzoni's excellent repo [dessine-moi-un-cluster](https://github.com/jpetazzo/dessine-moi-un-cluster) for this part and updated. Thanks a lot, Jérôme :).
-
-I also adapted parts of [Kelsey Hightower's kubernetes the hard way](https://github.com/kelseyhightower/kubernetes-the-hard-way) (the TLS certs).
-
-I'm going to launch this on a clean VM running Ubuntu 22.04. Hostname for this VM must be **kubernetes**.
-
 ### api-server & friends
 
 Get kubernetes binaries from the kubernetes release page. We want the "server" bundle for amd64 Linux.
