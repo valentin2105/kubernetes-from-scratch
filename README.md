@@ -1,4 +1,4 @@
-# demystifions-kubernetes
+# Kubernetes step-by-step
 
 ### api-server & friends
 
