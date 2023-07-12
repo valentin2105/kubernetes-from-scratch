@@ -7,6 +7,9 @@ if [ `uname -i` == 'aarch64' ]; then
   ARCH="arm64"
 fi
 
+echo "-------------------------------------------"
+echo "Upgrade & install requiered pkgs..."
+echo "-------------------------------------------"
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt install tmux curl golang-cfssl  -y
@@ -21,9 +24,17 @@ CNI_PLUGINS_VERSION=1.2.0
 mkdir -p bin/
 
 # get Helm
+echo "-------------------------------------------"
+echo "Install Helm..."
+echo "-------------------------------------------"
+
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
 # get k8s-bins
+echo "-------------------------------------------"
+echo "Download k8s ..."
+echo "-------------------------------------------"
+
 curl -L https://dl.k8s.io/v${K8S_VERSION}/kubernetes-server-linux-${ARCH}.tar.gz -o kubernetes-server-linux-${ARCH}.tar.gz
 tar -zxf kubernetes-server-linux-${ARCH}.tar.gz
 for BINARY in kubectl kube-apiserver kube-scheduler kube-controller-manager kubelet kube-proxy;
@@ -39,6 +50,10 @@ echo 'source <(kubectl completion bash)' >>~/.bashrc
 
 mv kube* bin/
 
+echo "-------------------------------------------"
+echo "Download ETCD ..."
+echo "-------------------------------------------"
+
 curl -L https://github.com/etcd-io/etcd/releases/download/v${ETCD_VERSION}/etcd-v${ETCD_VERSION}-linux-${ARCH}.tar.gz | 
   tar --strip-components=1 --wildcards -zx '*/etcd'
 mv etcd bin/
@@ -46,14 +61,26 @@ mv etcd bin/
 mkdir etcd-data
 chmod 700 etcd-data
 
+echo "-------------------------------------------"
+echo "Download  ContainerD..."
+echo "-------------------------------------------"
+
 wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/containerd-${CONTAINERD_VERSION}-linux-${ARCH}.tar.gz
 tar --strip-components=1 --wildcards -zx '*/ctr' '*/containerd' '*/containerd-shim-runc-v2' -f containerd-${CONTAINERD_VERSION}-linux-${ARCH}.tar.gz
 rm containerd-${CONTAINERD_VERSION}-linux-${ARCH}.tar.gz
 mv containerd* ctr bin/
 
+echo "-------------------------------------------"
+echo "Download RunC..."
+echo "-------------------------------------------"
+
 curl https://github.com/opencontainers/runc/releases/download/v${RUNC_VERSION}/runc.${ARCH} -L -o runc
 chmod +x runc
 sudo mv runc /usr/bin/
+
+echo "-------------------------------------------"
+echo "Download CNI..."
+echo "-------------------------------------------"
 
 wget https://github.com/cilium/cilium-cli/releases/download/v${CILIUM_VERSION}/cilium-linux-${ARCH}.tar.gz
 tar xzf cilium-linux-${ARCH}.tar.gz
@@ -76,5 +103,10 @@ if [ $? -eq 0 ]; then
   sudo netfilter-persistent save
 fi
 
-# this will save me from forgetting generating certs
-run/0-gen-certs.sh
+
+echo "-------------------------------------------"
+echo "Generate Certificates..."
+echo "-------------------------------------------"
+
+
+run/gen-certs.sh
