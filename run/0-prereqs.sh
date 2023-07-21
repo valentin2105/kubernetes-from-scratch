@@ -77,7 +77,7 @@ version = 2
 [plugins."io.containerd.grpc.v1.cri".registry]
   [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
     [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
-      endpoint = ["https://reg.ntl.nc"]
+    endpoint = ["https://reg.ntl.nc/v2/proxy/"]
 EOF
 
 echo "-------------------------------------------"
@@ -87,6 +87,7 @@ echo "-------------------------------------------"
 wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.27.1/crictl-v1.27.1-linux-amd64.tar.gz
 tar -zxvf crictl-v1.27.1-linux-amd64.tar.gz
 sudo mv crictl /usr/bin/
+rm crictl-v1.27.1-linux-amd64.tar.gz
 
 cat <<EOF >> /etc/crictl.yaml
 runtime-endpoint: unix:///run/containerd/containerd.sock
