@@ -22,4 +22,4 @@ bin/kube-apiserver ${CERTS_OPTS} ${ETCD_OPTS} \
 
 # kubectl api-resources | head
 
-# kubectl create deployment web --image=nginx
+kubectl create deployment web --image=reg.ntl.nc/library/nginx

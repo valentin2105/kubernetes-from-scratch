@@ -70,6 +70,31 @@ tar --strip-components=1 --wildcards -zx '*/ctr' '*/containerd' '*/containerd-sh
 rm containerd-${CONTAINERD_VERSION}-linux-${ARCH}.tar.gz
 mv containerd* ctr bin/
 
+mkdir -p /etc/containerd/
+
+cat <<EOF >> /etc/containerd/config.toml
+version = 2
+[plugins."io.containerd.grpc.v1.cri".registry]
+  [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+    [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
+      endpoint = ["https://reg.ntl.nc"]
+EOF
+
+echo "-------------------------------------------"
+echo "Download CriCTL..."
+echo "-------------------------------------------"
+
+wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.27.1/crictl-v1.27.1-linux-amd64.tar.gz
+tar -zxvf crictl-v1.27.1-linux-amd64.tar.gz
+sudo mv crictl /usr/bin/
+
+cat <<EOF >> /etc/crictl.yaml
+runtime-endpoint: unix:///run/containerd/containerd.sock
+image-endpoint: unix:///run/containerd/containerd.sock
+timeout: 10
+debug: false
+EOF
+
 echo "-------------------------------------------"
 echo "Download RunC..."
 echo "-------------------------------------------"
