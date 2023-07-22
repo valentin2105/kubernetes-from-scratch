@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#sudo bin/kubelet --kubeconfig admin.conf --config=kubelet-config.yml \
 sudo bin/kubelet --kubeconfig admin.conf \
 --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock
 
