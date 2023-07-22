@@ -1,4 +1,4 @@
-# Kubernetes step-by-step
+# Kubernetes from scratch
 
 ### api-server & friends
 
@@ -295,7 +295,7 @@ spec:
         app: web
     spec:
       containers:
-      - image: zwindler/dk
+      - image: traefik/whoami
         name: nginx
 EOF
 kubectl apply -f deploy.yaml
