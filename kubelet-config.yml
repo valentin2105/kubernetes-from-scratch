@@ -1,3 +1,3 @@
-clusterDomain: {{ clusterDomain }}
+clusterDomain: cluster.local
 clusterDNS:
-  - ""
+  - "10.0.0.10"
