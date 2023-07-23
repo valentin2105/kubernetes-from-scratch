@@ -1,7 +1,6 @@
 #!/bin/bash
 
-#sudo bin/kubelet --kubeconfig admin.conf --config=kubelet-config.yml \
-sudo bin/kubelet --kubeconfig admin.conf \
+sudo bin/kubelet --kubeconfig admin.conf --config=kubelet-config.yml \
 --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock
 
 # If your server has swap (but we should have disabled it)
