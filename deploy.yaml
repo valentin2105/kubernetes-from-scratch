@@ -15,5 +15,5 @@ spec:
         app: whoami
     spec:
       containers:
-      - image: reg.ntl.nc/library/whoami:latest
+      - image: reg.ntl.nc/proxy/containous/whoami:latest
         name: whoami

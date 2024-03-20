@@ -14,7 +14,7 @@ sudo apt update -y
 sudo apt upgrade -y
 sudo apt install tmux curl golang-cfssl  -y
 
-K8S_VERSION=1.27.3
+K8S_VERSION=1.28.7
 ETCD_VERSION=3.5.7
 CONTAINERD_VERSION=1.7.0
 RUNC_VERSION=1.1.4
